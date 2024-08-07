@@ -1,9 +1,9 @@
 # Flutter Beginner's Checklist
 
 ## 1. Dart Basics
-- [ ] **Variables and Data Types:** Understanding of common data types (int, double, String, bool, List, Map).
-- [ ] **Control Flow Statements:** If-else, loops (for, while, do-while), and switch-case.
-- [ ] **Functions:** How to define and use functions, including anonymous functions and lambda expressions.
+- [x] **Variables and Data Types:** Understanding of common data types (int, double, String, bool, List, Map).
+- [x] **Control Flow Statements:** If-else, loops (for, while, do-while), and switch-case.
+- [x] **Functions:** How to define and use functions, including anonymous functions and lambda expressions.
 - [ ] **Classes and Objects:** Object-oriented programming concepts like classes, objects, inheritance, and polymorphism.
 
 ## 2. Flutter Framework Basics
