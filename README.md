@@ -7,7 +7,7 @@
 - [x] **Classes and Objects:** Object-oriented programming concepts like classes, objects, inheritance, and polymorphism.
 
 ## 2. Flutter Framework Basics
-- [ ] **Flutter SDK Installation:** Install the Flutter SDK and set up your development environment.
+- [x] **Flutter SDK Installation:** Install the Flutter SDK and set up your development environment.
 - [ ] **Flutter Project Structure:** Understanding the structure of a Flutter project, including the `lib` directory and the `main.dart` file.
 - [ ] **Widgets:** Everything in Flutter is a widget. Learn about StatelessWidget and StatefulWidget.
 - [ ] **Hot Reload and Hot Restart:** Use these features to quickly see changes in your app during development.
