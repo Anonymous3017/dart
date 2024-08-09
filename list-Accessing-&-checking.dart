@@ -1,4 +1,15 @@
 void main() {
+  //Fixed length list
+  List<int> fixedLengthList = List.filled(5, 0);
+  fixedLengthList[0] = 1;
+  fixedLengthList[1] = 2;
+  fixedLengthList[2] = 3;
+  fixedLengthList[3] = 4;
+  fixedLengthList[4] = 5;
+  print('Fixed length list is $fixedLengthList');
+
+
+
   // Accessing Elements in a List in Dart
 
   // 1. elementAt(int index)
