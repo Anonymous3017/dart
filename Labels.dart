@@ -24,6 +24,7 @@ void main() {
 
   //some more examples
   outerLoop: for (var i = 0; i < 5; i++) {
+    // ignore: unused_label
     innerLoop: for (var j = 0; j < 5; j++) {
       if (i == 2 && j == 2) {
         continue outerLoop;
