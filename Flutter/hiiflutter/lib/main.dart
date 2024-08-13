@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.white,
         ),
         body: Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
@@ -36,31 +36,36 @@ class MyApp extends StatelessWidget {
                 "Welcome to Hello Flutter App!",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              const Column(
+              Column(
                 children: [
-                  Text("Image"),
-                  SizedBox(
+                  Image.asset(
+                    "assets/images/flutter_icon.png",
+                    height: 100,
+                  ),
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     "This app is developed by Ayush!",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
               Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(20)),
-                  child: const Row(
+                  child: Row(
                     children: [
-                      Text("Image", style: TextStyle(color: Colors.white)),
-                      SizedBox(
+                      Image.network(
+                          "https://avatars.githubusercontent.com/u/84234373?v=4",
+                          height: 50),
+                      const SizedBox(
                         width: 20,
                       ),
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
