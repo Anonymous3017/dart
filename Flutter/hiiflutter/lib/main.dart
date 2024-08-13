@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hiiflutter/child_one.dart';
+import 'package:hiiflutter/child_three.dart';
+import 'package:hiiflutter/child_two.dart';
 
 main() {
   runApp(MyApp());
@@ -35,66 +38,13 @@ class MyApp extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.blue[100],
           ),
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                "Welcome to Hello Flutter App!",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, fontFamily: "Poppins"),
-              ),
-              Column(
-                children: [
-                  Image.asset(
-                    "assets/images/flutter_icon.png",
-                    height: 100,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    "This app is developed by Ayush!",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontFamily: "Poppins"),
-                  ),
-                ],
-              ),
-              Container(
-                  padding: const EdgeInsets.all(20),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Row(
-                    children: [
-                      Image.network(
-                          "https://avatars.githubusercontent.com/u/84234373?v=4",
-                          height: 50),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Ayush",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Flutter Developer",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "f8th.netlify.app",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ))
+              ChildOne(),
+              ChildTwo(),
+              ChildThree(),
             ],
           ),
         ),
