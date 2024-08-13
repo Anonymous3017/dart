@@ -9,7 +9,8 @@ class ChildThree extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Colors.black, borderRadius: BorderRadius.circular(20)),
+            color: Colors.blueGrey[900],
+            borderRadius: BorderRadius.circular(20)),
         child: Row(
           children: [
             Image.network(
@@ -22,13 +23,19 @@ class ChildThree extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Ayush",
+                  "Ayush Gupta",
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 3,
                 ),
                 Text(
                   "Flutter Developer",
                   style: TextStyle(color: Colors.white),
+                ),
+                SizedBox(
+                  height: 3,
                 ),
                 Text(
                   "f8th.netlify.app",
