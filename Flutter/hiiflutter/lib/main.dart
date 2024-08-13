@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
@@ -14,9 +15,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: "Poppins",
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Hello Flutter"),
+          title: const Text(
+            "Hello Flutter",
+            style: TextStyle(fontFamily: "Poppins"),
+          ),
           centerTitle: true,
           backgroundColor: Colors.blue[900],
           foregroundColor: Colors.white,
@@ -34,7 +41,8 @@ class MyApp extends StatelessWidget {
             children: [
               const Text(
                 "Welcome to Hello Flutter App!",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, fontFamily: "Poppins"),
               ),
               Column(
                 children: [
@@ -47,7 +55,8 @@ class MyApp extends StatelessWidget {
                   ),
                   const Text(
                     "This app is developed by Ayush!",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, fontFamily: "Poppins"),
                   ),
                 ],
               ),
