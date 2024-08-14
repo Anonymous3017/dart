@@ -8,15 +8,15 @@
 
 ## 2. Flutter Framework Basics
 - [x] **Flutter SDK Installation:** Install the Flutter SDK and set up your development environment.
-- [ ] **Flutter Project Structure:** Understanding the structure of a Flutter project, including the `lib` directory and the `main.dart` file.
-- [ ] **Widgets:** Everything in Flutter is a widget. Learn about StatelessWidget and StatefulWidget.
-- [ ] **Hot Reload and Hot Restart:** Use these features to quickly see changes in your app during development.
+- [X] **Flutter Project Structure:** Understanding the structure of a Flutter project, including the `lib` directory and the `main.dart` file.
+- [x] **Widgets:** Everything in Flutter is a widget. Learn about StatelessWidget and StatefulWidget.
+- [x] **Hot Reload and Hot Restart:** Use these features to quickly see changes in your app during development.
 
 ## 3. Building User Interfaces
 - [ ] **Common Widgets:** 
-  - [ ] **Text:** Displaying text.
-  - [ ] **Row and Column:** Arranging widgets horizontally and vertically.
-  - [ ] **Container:** Adding padding, margins, borders, and background color.
+  - [x] **Text:** Displaying text.
+  - [x] **Row and Column:** Arranging widgets horizontally and vertically.
+  - [x] **Container:** Adding padding, margins, borders, and background color.
   - [ ] **ListView:** Creating scrollable lists.
   - [ ] **Scaffold:** Basic structure of a visual interface with AppBar, Drawer, and other common UI elements.
 
