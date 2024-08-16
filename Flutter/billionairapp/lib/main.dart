@@ -4,9 +4,23 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  void buttonClicked() {
-    print('Button clicked');
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  double balance = 0.0;
+
+  void addMoney() {
+    balance += 500;
+
+    // Update the UI
+    setState(() {
+      balance = balance;
+    });
+
+    print(balance);
   }
 
   @override
@@ -27,14 +41,14 @@ class MyApp extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Expanded(
+                Expanded(
                   flex: 9,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('ballance part'),
-                      SizedBox(height: 20),
-                      Text('0'),
+                      const Text('ballance part'),
+                      const SizedBox(height: 20),
+                      Text('$balance'),
                     ],
                   ),
                 ),
@@ -44,8 +58,8 @@ class MyApp extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red[400],
                           minimumSize: const Size(double.infinity, 0)),
-                      onPressed: buttonClicked,
-                      child: const Text('Add 1 Billion')),
+                      onPressed: addMoney,
+                      child: const Text('Add 500\$ Billion')),
                 ),
               ],
             ),
