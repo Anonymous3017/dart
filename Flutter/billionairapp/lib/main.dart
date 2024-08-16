@@ -27,6 +27,12 @@ class _MyAppState extends State<MyApp> {
     print(balance);
   }
 
+  @override
+  void initState() {
+    loadBalance();
+    super.initState();
+  }
+
   void loadBalance() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final double? savedBalance = prefs.getDouble('balance');
@@ -63,9 +69,6 @@ class _MyAppState extends State<MyApp> {
                       const Text('ballance part'),
                       const SizedBox(height: 20),
                       Text('$balance'),
-                      OutlinedButton(
-                          onPressed: loadBalance,
-                          child: const Text('Load Balance')),
                     ],
                   ),
                 ),
