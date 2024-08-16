@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Billionaire App!',
-      theme: ThemeData.dark(),
+      theme: ThemeData.dark(useMaterial3: true),
       home: Scaffold(
           appBar:
               AppBar(title: const Text('Billionaire App!'), centerTitle: true),
@@ -27,36 +27,26 @@ class MyApp extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        color: Colors.red,
-                        child: const Text('1'),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        color: Colors.green,
-                        child: const Text('2'),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        color: Colors.blue,
-                        child: const Text('3'),
-                      ),
-                    ),
-                  ],
+                const Expanded(
+                  flex: 9,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('ballance part'),
+                      SizedBox(height: 20),
+                      Text('0'),
+                    ],
+                  ),
                 ),
-                // const Text('ballance part'),
-                ElevatedButton(
-                    onPressed: buttonClicked, child: const Text('Click here')),
+                Expanded(
+                  flex: 1,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red[400],
+                          minimumSize: const Size(double.infinity, 0)),
+                      onPressed: buttonClicked,
+                      child: const Text('Add 1 Billion')),
+                ),
               ],
             ),
           )),
