@@ -20,6 +20,7 @@ class _MainscreenState extends State<Mainscreen> {
     setState(() {
       todoList.insert(0, todoText);
     });
+    Navigator.pop(context);
   }
 
   @override
