@@ -9,8 +9,6 @@ class Mainscreen extends StatefulWidget {
 }
 
 class _MainscreenState extends State<Mainscreen> {
-  String text = 'Simple Text';
-
   List<String> todoList = [
     "Drinkl water",
     "Go for a walk",
@@ -18,9 +16,9 @@ class _MainscreenState extends State<Mainscreen> {
     "Take a nap"
   ];
 
-  void changeText({required String todoText}) {
+  void addTodo({required String todoText}) {
     setState(() {
-      text = '$todoText';
+      todoList.insert(0, todoText);
     });
   }
 
@@ -42,7 +40,7 @@ class _MainscreenState extends State<Mainscreen> {
                         child: Container(
                           padding: EdgeInsets.all(20),
                           height: 200,
-                          child: AddTodo(changeText: changeText),
+                          child: AddTodo(addTodo: addTodo),
                         ),
                       );
                     });
