@@ -61,7 +61,23 @@ class _MainscreenState extends State<Mainscreen> {
             itemBuilder: (context, int index) {
               return ListTile(
                 title: Text(todoList[index]),
-                onTap: () {},
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.all(20),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    todoList.removeAt(index);
+                                  });
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Mark as done')));
+                      });
+                },
               );
             }));
   }
