@@ -14,6 +14,15 @@ class _MainscreenState extends State<Mainscreen> {
       appBar: AppBar(
         title: Text('Todo App'),
         centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.add,
+              size: 30,
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: Text('Welcome to Todo App'),
