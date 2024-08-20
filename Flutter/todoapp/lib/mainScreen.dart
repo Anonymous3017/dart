@@ -11,6 +11,13 @@ class Mainscreen extends StatefulWidget {
 class _MainscreenState extends State<Mainscreen> {
   String text = 'Simple Text';
 
+  List<String> todoList = [
+    "Drinkl water",
+    "Go for a walk",
+    "Do some coding",
+    "Take a nap"
+  ];
+
   void changeText({required String todoText}) {
     setState(() {
       text = '$todoText';
@@ -20,39 +27,43 @@ class _MainscreenState extends State<Mainscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
-      appBar: AppBar(
-        title: Text('Todo App'),
-        centerTitle: true,
-        actions: [
-          InkWell(
-            onTap: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return Padding(
-                      padding: MediaQuery.of(context).viewInsets,
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        height: 200,
-                        child: AddTodo(changeText: changeText),
-                      ),
-                    );
-                  });
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.add,
-                size: 30,
+        drawer: Drawer(),
+        appBar: AppBar(
+          title: Text('Todo App'),
+          centerTitle: true,
+          actions: [
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Padding(
+                        padding: MediaQuery.of(context).viewInsets,
+                        child: Container(
+                          padding: EdgeInsets.all(20),
+                          height: 200,
+                          child: AddTodo(changeText: changeText),
+                        ),
+                      );
+                    });
+              },
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.add,
+                  size: 30,
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-      body: Container(
-        child: Text("$text"),
-      ),
-    );
+          ],
+        ),
+        body: ListView.builder(
+            itemCount: todoList.length,
+            itemBuilder: (context, int index) {
+              return ListTile(
+                title: Text(todoList[index]),
+                onTap: () {},
+              );
+            }));
   }
 }
