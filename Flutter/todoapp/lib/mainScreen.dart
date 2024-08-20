@@ -11,9 +11,9 @@ class Mainscreen extends StatefulWidget {
 class _MainscreenState extends State<Mainscreen> {
   String text = 'Simple Text';
 
-  void changeText() {
+  void changeText({required String todoText}) {
     setState(() {
-      text = 'Hello world';
+      text = '$todoText';
     });
   }
 
@@ -40,8 +40,8 @@ class _MainscreenState extends State<Mainscreen> {
                     );
                   });
             },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Icon(
                 Icons.add,
                 size: 30,
