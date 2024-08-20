@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/addTodo.dart';
 
 class Mainscreen extends StatefulWidget {
   const Mainscreen({super.key});
@@ -22,7 +23,9 @@ class _MainscreenState extends State<Mainscreen> {
                   context: context,
                   builder: (context) {
                     return Container(
-                      height: 250,
+                      padding: EdgeInsets.all(20),
+                      height: 200,
+                      child: AddTodo(),
                     );
                   });
             },
@@ -36,9 +39,7 @@ class _MainscreenState extends State<Mainscreen> {
           ),
         ],
       ),
-      body: Center(
-        child: Text('Welcome to Todo App'),
-      ),
+      body: Container(),
     );
   }
 }
