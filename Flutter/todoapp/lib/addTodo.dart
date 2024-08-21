@@ -18,6 +18,7 @@ class _AddTodoState extends State<AddTodo> {
       children: [
         Text('Add Todo'),
         TextField(
+          autofocus: true,
           controller: todoText,
           decoration: InputDecoration(
             hintText: 'Enter your todo',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todoapp/addTodo.dart';
+import 'package:todoapp/widgets/todoList.dart';
 
 class Mainscreen extends StatefulWidget {
   const Mainscreen({super.key});
@@ -13,6 +14,27 @@ class _MainscreenState extends State<Mainscreen> {
   List<String> todoList = [];
 
   void addTodo({required String todoText}) {
+    if (todoList.contains(todoText)) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Todo already exists'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
     setState(() {
       todoList.insert(0, todoText);
     });
@@ -23,21 +45,36 @@ class _MainscreenState extends State<Mainscreen> {
   void updateLocalData() async {
     // Obtain shared preferences.
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-  
+
     // Save a list of strings to 'todoList' key.
     await prefs.setStringList('todoList', todoList);
   }
-  
+
   void loadData() async {
     // Obtain shared preferences.
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-  
+
     // Try reading data from the 'todoList' key. If it doesn't exist, return an empty list.
     setState(() {
       todoList = (prefs.getStringList('todoList') ?? []).toList();
     });
   }
-  
+
+  void showAddTodoBottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: Container(
+              padding: EdgeInsets.all(20),
+              height: 200,
+              child: AddTodo(addTodo: addTodo),
+            ),
+          );
+        });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -53,20 +90,7 @@ class _MainscreenState extends State<Mainscreen> {
           centerTitle: true,
           actions: [
             InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return Padding(
-                        padding: MediaQuery.of(context).viewInsets,
-                        child: Container(
-                          padding: EdgeInsets.all(20),
-                          height: 200,
-                          child: AddTodo(addTodo: addTodo),
-                        ),
-                      );
-                    });
-              },
+              onTap: showAddTodoBottomSheet,
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Icon(
@@ -77,30 +101,7 @@ class _MainscreenState extends State<Mainscreen> {
             ),
           ],
         ),
-        body: ListView.builder(
-            itemCount: todoList.length,
-            itemBuilder: (context, int index) {
-              return ListTile(
-                title: Text(todoList[index]),
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                            width: double.infinity,
-                            padding: EdgeInsets.all(20),
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    todoList.removeAt(index);
-                                  });
-                                  updateLocalData();
-                                  Navigator.pop(context);
-                                },
-                                child: Text('Mark as done')));
-                      });
-                },
-              );
-            }));
+        body: TodoListBuilder(
+            todoList: todoList, updateLocalData: updateLocalData));
   }
 }
