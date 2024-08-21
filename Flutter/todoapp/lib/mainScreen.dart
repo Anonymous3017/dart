@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todoapp/addTodo.dart';
 import 'package:todoapp/widgets/todoList.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Mainscreen extends StatefulWidget {
   const Mainscreen({super.key});
@@ -13,6 +14,7 @@ class Mainscreen extends StatefulWidget {
 class _MainscreenState extends State<Mainscreen> {
   List<String> todoList = [];
 
+  //function to add todos to the list
   void addTodo({required String todoText}) {
     if (todoList.contains(todoText)) {
       showDialog(
@@ -42,6 +44,7 @@ class _MainscreenState extends State<Mainscreen> {
     Navigator.pop(context);
   }
 
+  //function to update local data and save it to shared preferences
   void updateLocalData() async {
     // Obtain shared preferences.
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -50,6 +53,7 @@ class _MainscreenState extends State<Mainscreen> {
     await prefs.setStringList('todoList', todoList);
   }
 
+  //function to load data from shared preferences
   void loadData() async {
     // Obtain shared preferences.
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -60,6 +64,7 @@ class _MainscreenState extends State<Mainscreen> {
     });
   }
 
+  //function to show modal bottom sheet to add todo
   void showAddTodoBottomSheet() {
     showModalBottomSheet(
         context: context,
@@ -75,6 +80,7 @@ class _MainscreenState extends State<Mainscreen> {
         });
   }
 
+  //load data when the screen is loaded for the first time
   @override
   void initState() {
     super.initState();
@@ -84,7 +90,44 @@ class _MainscreenState extends State<Mainscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: Drawer(),
+        drawer: Drawer(
+          child: Column(
+            children: [
+              Container(
+                color: Colors.blue,
+                height: 200,
+                width: double.infinity,
+                child: const Center(
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.person,
+                      size: 50,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  launchUrl(Uri.https('f8th.netlify.app', ''));
+                },
+                leading: Icon(Icons.person),
+                title: const Text('About Me',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
+              ListTile(
+                onTap: () {
+                  launchUrl(Uri.https('mailto:ayushgupta9592@gmail.com', ''));
+                },
+                leading: Icon(Icons.email),
+                title: const Text('Contact Me',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
+            ],
+          ),
+        ),
         appBar: AppBar(
           title: Text('Todo App'),
           centerTitle: true,
