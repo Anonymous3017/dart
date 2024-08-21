@@ -37,7 +37,7 @@
 - [ ] **JSON Parsing:** Parsing JSON data into Dart objects.
 
 ## 8. Persistent Storage
-- [ ] **Shared Preferences:** Storing simple key-value pairs locally.
+- [x] **Shared Preferences:** Storing simple key-value pairs locally.
 - [ ] **Local Database:** Using SQLite or Hive for local database storage (Hive is more straightforward for beginners).
 
 ## 9. Debugging and Testing
