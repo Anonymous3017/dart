@@ -33,25 +33,34 @@ class _TodoListBuilderState extends State<TodoListBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: widget.todoList.length,
-        itemBuilder: (context, int index) {
-          return ListTile(
-            title: Text(widget.todoList[index]),
-            //make list fontwidth bold
-            titleTextStyle: const TextStyle(
-                // fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.black,
-                decorationColor: Colors.black,
-                decorationStyle: TextDecorationStyle.solid,
-                letterSpacing: 0.5),
-            tileColor: Colors.grey[200],
+    return (widget.todoList.isEmpty)
+        ? const Center(
+            child: Text("No Items in Todo List",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                    decorationColor: Colors.black,
+                    decorationStyle: TextDecorationStyle.solid,
+                    letterSpacing: 0.5)))
+        : ListView.builder(
+            itemCount: widget.todoList.length,
+            itemBuilder: (context, int index) {
+              return ListTile(
+                title: Text(widget.todoList[index]),
+                //make list fontwidth bold
+                titleTextStyle: const TextStyle(
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.black,
+                    decorationColor: Colors.black,
+                    decorationStyle: TextDecorationStyle.solid,
+                    letterSpacing: 0.5),
+                tileColor: Colors.grey[200],
 
-            onTap: () {
-              onItemClicked(index: index);
-            },
-          );
-        });
+                onTap: () {
+                  onItemClicked(index: index);
+                },
+              );
+            });
   }
 }
