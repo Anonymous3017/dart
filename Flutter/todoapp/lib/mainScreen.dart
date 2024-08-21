@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todoapp/addTodo.dart';
 
 class Mainscreen extends StatefulWidget {
@@ -9,18 +10,38 @@ class Mainscreen extends StatefulWidget {
 }
 
 class _MainscreenState extends State<Mainscreen> {
-  List<String> todoList = [
-    "Drinkl water",
-    "Go for a walk",
-    "Do some coding",
-    "Take a nap"
-  ];
+  List<String> todoList = [];
 
   void addTodo({required String todoText}) {
     setState(() {
       todoList.insert(0, todoText);
     });
+    updateLocalData();
     Navigator.pop(context);
+  }
+
+  void updateLocalData() async {
+    // Obtain shared preferences.
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  
+    // Save a list of strings to 'todoList' key.
+    await prefs.setStringList('todoList', todoList);
+  }
+  
+  void loadData() async {
+    // Obtain shared preferences.
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  
+    // Try reading data from the 'todoList' key. If it doesn't exist, return an empty list.
+    setState(() {
+      todoList = (prefs.getStringList('todoList') ?? []).toList();
+    });
+  }
+  
+  @override
+  void initState() {
+    super.initState();
+    loadData();
   }
 
   @override
@@ -73,6 +94,7 @@ class _MainscreenState extends State<Mainscreen> {
                                   setState(() {
                                     todoList.removeAt(index);
                                   });
+                                  updateLocalData();
                                   Navigator.pop(context);
                                 },
                                 child: Text('Mark as done')));

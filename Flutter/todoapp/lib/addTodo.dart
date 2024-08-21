@@ -26,6 +26,27 @@ class _AddTodoState extends State<AddTodo> {
         ),
         ElevatedButton(
           onPressed: () {
+            //check if textbox is not empty if it is return alert dialog
+            if (todoText.text.isEmpty) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Error'),
+                    content: Text('Please enter a todo'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+              return;
+            }
             print(todoText.text);
             widget.addTodo(todoText: todoText.text);
             todoText.clear();
