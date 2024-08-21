@@ -45,21 +45,62 @@ class _TodoListBuilderState extends State<TodoListBuilder> {
         : ListView.builder(
             itemCount: widget.todoList.length,
             itemBuilder: (context, int index) {
-              return ListTile(
-                title: Text(widget.todoList[index]),
-                //make list fontwidth bold
-                titleTextStyle: const TextStyle(
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.black,
-                    decorationColor: Colors.black,
-                    decorationStyle: TextDecorationStyle.solid,
-                    letterSpacing: 0.5),
-                tileColor: Colors.grey[200],
-
-                onTap: () {
-                  onItemClicked(index: index);
+              return Dismissible(
+                key: UniqueKey(),
+                //direction of swipe restrected to left to right only
+                direction: DismissDirection.startToEnd,
+                background: Container(
+                  color: Colors.green,
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      // Add a text of done to the left of the icon
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text('Done'),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Icon(Icons.done),
+                      ),
+                    ],
+                  ),
+                ),
+                // restricted this secondary background above to show only on left to right swipe
+                secondaryBackground: Container(
+                  color: Colors.red,
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Icon(Icons.delete),
+                      ),
+                    ],
+                  ),
+                ),
+                onDismissed: (direction) {
+                  setState(() {
+                    widget.todoList.removeAt(index);
+                  });
+                  widget.updateLocalData();
                 },
+                child: ListTile(
+                  title: Text(widget.todoList[index]),
+                  //make list fontwidth bold
+                  titleTextStyle: const TextStyle(
+                      // fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.black,
+                      decorationColor: Colors.black,
+                      decorationStyle: TextDecorationStyle.solid,
+                      letterSpacing: 0.5),
+                  tileColor: Colors.grey[200],
+
+                  onTap: () {
+                    onItemClicked(index: index);
+                  },
+                ),
               );
             });
   }
