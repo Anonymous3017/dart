@@ -18,7 +18,7 @@ class _TodoListBuilderState extends State<TodoListBuilder> {
         builder: (context) {
           return Container(
               width: double.infinity,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: ElevatedButton(
                   onPressed: () {
                     setState(() {

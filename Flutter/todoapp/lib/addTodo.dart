@@ -16,11 +16,12 @@ class _AddTodoState extends State<AddTodo> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('Add Todo'),
+        const Text('Add Todo'),
         TextField(
+          onSubmitted: (value) => widget.addTodo(todoText: todoText.text),
           autofocus: true,
           controller: todoText,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Enter your todo',
             contentPadding: EdgeInsets.all(5),
           ),
@@ -33,14 +34,14 @@ class _AddTodoState extends State<AddTodo> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text('Error'),
-                    content: Text('Please enter a todo'),
+                    title: const Text('Error'),
+                    content: const Text('Please enter a todo'),
                     actions: [
                       TextButton(
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Text('OK'),
+                        child: const Text('OK'),
                       ),
                     ],
                   );
@@ -48,11 +49,10 @@ class _AddTodoState extends State<AddTodo> {
               );
               return;
             }
-            print(todoText.text);
             widget.addTodo(todoText: todoText.text);
             todoText.clear();
           },
-          child: Text('Add'),
+          child: const Text('Add'),
         ),
       ],
     );
