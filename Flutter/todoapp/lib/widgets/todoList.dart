@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TodoListBuilder extends StatefulWidget {
   List<String> todoList = [];
-  void Function() updateLocalData;
+  final void Function() updateLocalData;
   TodoListBuilder(
       {super.key, required this.todoList, required this.updateLocalData});
 

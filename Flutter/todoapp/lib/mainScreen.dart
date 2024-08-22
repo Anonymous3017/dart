@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todoapp/addTodo.dart';
+import 'package:todoapp/widgets/appDrawer.dart';
 import 'package:todoapp/widgets/todoList.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Mainscreen extends StatefulWidget {
   const Mainscreen({super.key});
@@ -16,19 +16,20 @@ class _MainscreenState extends State<Mainscreen> {
 
   //function to add todos to the list
   void addTodo({required String todoText}) {
+    // check if todo already exists in the list if it does show alert dialog
     if (todoList.contains(todoText)) {
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Error'),
-            content: Text('Todo already exists'),
+            title: const Text('Error'),
+            content: const Text('Todo already exists'),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -37,6 +38,7 @@ class _MainscreenState extends State<Mainscreen> {
       return;
     }
 
+    //add todo to the list and update the state
     setState(() {
       todoList.insert(0, todoText);
     });
@@ -92,50 +94,13 @@ class _MainscreenState extends State<Mainscreen> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: showAddTodoBottomSheet,
-          child: const Icon(Icons.add, color: Colors.white),
           backgroundColor: Colors.blueGrey[900],
-          shape: CircleBorder(),
+          shape: const CircleBorder(),
+          child: const Icon(Icons.add, color: Colors.white),
         ),
-        drawer: Drawer(
-          child: Column(
-            children: [
-              Container(
-                color: Colors.blue,
-                height: 200,
-                width: double.infinity,
-                child: const Center(
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.white,
-                    child: Icon(
-                      Icons.person,
-                      size: 50,
-                      color: Colors.blue,
-                    ),
-                  ),
-                ),
-              ),
-              ListTile(
-                onTap: () {
-                  launchUrl(Uri.https('f8th.netlify.app', ''));
-                },
-                leading: Icon(Icons.person),
-                title: const Text('About Me',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-              ),
-              ListTile(
-                onTap: () {
-                  launchUrl(Uri.https('mailto:ayushgupta9592@gmail.com', ''));
-                },
-                leading: Icon(Icons.email),
-                title: const Text('Contact Me',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-              ),
-            ],
-          ),
-        ),
+        drawer: const AppDrawer(),
         appBar: AppBar(
-          title: Text('Todo App'),
+          title: const Text('Todo App'),
           centerTitle: true,
         ),
         body: TodoListBuilder(
