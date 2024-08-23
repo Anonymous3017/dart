@@ -55,6 +55,13 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/add');
+        },
+        shape: const CircleBorder(),
+        child: const Icon(Icons.add),
+      ),
       appBar: AppBar(
         title: const Text('Bucket List'),
         actions: [
@@ -84,8 +91,7 @@ class _MainScreenState extends State<MainScreen> {
                             NetworkImage(bucketListData[index]['image']),
                       ),
                       title: Text(bucketListData[index]['item'] ?? ''),
-                      trailing:
-                          Text(bucketListData[index]['cost'].toString() ?? ''),
+                      trailing: Text(bucketListData[index]['cost'].toString()),
                     ),
                   );
                 }),
