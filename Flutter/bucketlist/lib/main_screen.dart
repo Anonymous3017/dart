@@ -10,14 +10,19 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   List<dynamic> bucketListData = [];
+  bool isLoading = false;
 
   Future<void> getData() async {
+    setState(() {
+      isLoading = true;
+    });
     //Get Data from API using dio
     try {
       Response response = await Dio().get(
           'https://flutterapitest12122002-default-rtdb.firebaseio.com/bucketlist.json');
       setState(() {
         bucketListData = response.data;
+        isLoading = false;
       });
       print(response.data);
     } catch (e) {
@@ -55,31 +60,35 @@ class _MainScreenState extends State<MainScreen> {
         actions: [
           InkWell(
               onTap: getData,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: const Icon(Icons.refresh),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(Icons.refresh),
               ))
         ],
       ),
       body: RefreshIndicator(
         onRefresh: getData,
-        child: ListView.builder(
-            itemCount: bucketListData.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    radius: 25,
-                    backgroundImage:
-                        NetworkImage(bucketListData[index]['image']),
-                  ),
-                  title: Text(bucketListData[index]['item'] ?? ''),
-                  trailing:
-                      Text(bucketListData[index]['cost'].toString() ?? ''),
-                ),
-              );
-            }),
+        child: (isLoading)
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : ListView.builder(
+                itemCount: bucketListData.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 25,
+                        backgroundImage:
+                            NetworkImage(bucketListData[index]['image']),
+                      ),
+                      title: Text(bucketListData[index]['item'] ?? ''),
+                      trailing:
+                          Text(bucketListData[index]['cost'].toString() ?? ''),
+                    ),
+                  );
+                }),
       ),
     );
   }
