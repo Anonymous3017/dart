@@ -18,13 +18,14 @@ class _MainScreenState extends State<MainScreen> {
   Future<void> getData() async {
     setState(() {
       isLoading = true;
+      isError = false;
     });
     //Get Data from API using dio
     try {
       Response response = await Dio().get(
           'https://flutterapitest12122002-default-rtdb.firebaseio.com/bucketlist.json');
       setState(() {
-        bucketListData = response.data;
+        bucketListData = response.data ?? [];
         isLoading = false;
         isError = false;
       });
@@ -127,9 +128,15 @@ class _MainScreenState extends State<MainScreen> {
                 ?
                 // Show an error message if there is an error
                 errorWidget(errorMessage: 'An error occurred')
-                :
-                // Show the list of data if there is no error
-                ListDataWidget(),
+                : (bucketListData.isEmpty)
+                    ?
+                    // Show a message if there is no data
+                    const Center(
+                        child: Text('No data found'),
+                      )
+                    :
+                    // Show the list of data if there is no error
+                    ListDataWidget(),
       ),
     );
   }
