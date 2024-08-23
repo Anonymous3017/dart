@@ -43,6 +43,7 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
   }
 
+  // Widget to show an error message
   Widget errorWidget({required String errorMessage}) {
     return Center(
       child: Column(
@@ -60,6 +61,7 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
+  // Widget to show the list of data fetched from the API
   Widget ListDataWidget() {
     return ListView.builder(
         itemCount: bucketListData.length,
@@ -67,6 +69,7 @@ class _MainScreenState extends State<MainScreen> {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
+              // Navigate to the ViewItemScreen when the ListTile is tapped
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return ViewItemScreen(
