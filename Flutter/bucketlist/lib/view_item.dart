@@ -46,6 +46,26 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
     }
   }
 
+  //Function for Mark as Complete
+  Future<void> markAsComplete() async {
+    Navigator.pop(context);
+    try {
+      // Mark the item as complete
+      Response response = await Dio().patch(
+          'https://flutterapitest12122002-default-rtdb.firebaseio.com/bucketlist/${widget.index}.json',
+          data: {'completed': true});
+      print(response.data);
+      Navigator.pop(context, true);
+      setState(() {
+        // Update the UI
+        // widget.getData();
+      });
+    } catch (e) {
+      // Handle the error
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +75,28 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
           PopupMenuButton(onSelected: (value) {
             if (value == 'complete') {
               // Mark the item as complete
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Mark as complete'),
+                      content: const Text(
+                          'Are you sure you want to mark this item as complete?'),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Cancel')),
+                        TextButton(
+                            onPressed: () {
+                              // Mark the item as complete
+                              markAsComplete();
+                            },
+                            child: const Text('Mark as complete')),
+                      ],
+                    );
+                  });
             } else if (value == 'delete') {
               // Delete the item
               showDialog(
