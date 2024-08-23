@@ -1,4 +1,5 @@
 import 'package:bucketlist/add_bucket_list.dart';
+import 'package:bucketlist/view_item.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
@@ -12,6 +13,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   List<dynamic> bucketListData = [];
   bool isLoading = false;
+  bool isError = false;
 
   Future<void> getData() async {
     setState(() {
@@ -24,26 +26,14 @@ class _MainScreenState extends State<MainScreen> {
       setState(() {
         bucketListData = response.data;
         isLoading = false;
+        isError = false;
       });
       print(response.data);
     } catch (e) {
-      // Handle the error here
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('Error'),
-              content: Text(e.toString()),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          });
+      setState(() {
+        isError = true;
+        isLoading = false;
+      });
     }
   }
 
@@ -51,6 +41,50 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     getData();
     super.initState();
+  }
+
+  Widget errorWidget({required String errorMessage}) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.warning),
+          Text(errorMessage),
+          ElevatedButton(
+              onPressed: () {
+                getData();
+              },
+              child: const Text('Retry'))
+        ],
+      ),
+    );
+  }
+
+  Widget ListDataWidget() {
+    return ListView.builder(
+        itemCount: bucketListData.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ViewItemScreen(
+                    title: bucketListData[index]['item'] ?? '',
+                    price: bucketListData[index]['cost'],
+                    imageUrl: bucketListData[index]['image'],
+                  );
+                }));
+              },
+              leading: CircleAvatar(
+                radius: 25,
+                backgroundImage: NetworkImage(bucketListData[index]['image']),
+              ),
+              title: Text(bucketListData[index]['item'] ?? ''),
+              trailing: Text(bucketListData[index]['cost'].toString()),
+            ),
+          );
+        });
   }
 
   @override
@@ -79,25 +113,20 @@ class _MainScreenState extends State<MainScreen> {
       body: RefreshIndicator(
         onRefresh: getData,
         child: (isLoading)
-            ? const Center(
+            ?
+            // Show a loading indicator while fetching data
+            const Center(
                 child: CircularProgressIndicator(),
               )
-            : ListView.builder(
-                itemCount: bucketListData.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 25,
-                        backgroundImage:
-                            NetworkImage(bucketListData[index]['image']),
-                      ),
-                      title: Text(bucketListData[index]['item'] ?? ''),
-                      trailing: Text(bucketListData[index]['cost'].toString()),
-                    ),
-                  );
-                }),
+            :
+            // Check if there is an error while fetching data
+            (isError)
+                ?
+                // Show an error message if there is an error
+                errorWidget(errorMessage: 'An error occurred')
+                :
+                // Show the list of data if there is no error
+                ListDataWidget(),
       ),
     );
   }
