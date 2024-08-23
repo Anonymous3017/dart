@@ -77,13 +77,18 @@ class _MainScreenState extends State<MainScreen> {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return ViewItemScreen(
-                          getData: getData,
+                          // getData: getData,
                           index: index,
                           title: bucketListData[index]['item'] ?? '',
                           price: bucketListData[index]['cost'],
                           imageUrl: bucketListData[index]['image'],
                         );
-                      }));
+                      })).then((onValue) {
+                        // Refresh the data when the ViewItemScreen is popped with a delete action in value
+                        if (onValue == true) {
+                          getData();
+                        }
+                      });
                     },
                     leading: CircleAvatar(
                       radius: 25,

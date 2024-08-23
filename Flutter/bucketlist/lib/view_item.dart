@@ -11,21 +11,23 @@ class ViewItemScreen extends StatefulWidget {
   // int index is for the index of the item
   final int index;
   // Function getData is for getting the data
-  final Function getData;
+  // final Function getData;
 
-  const ViewItemScreen(
-      {super.key,
-      required this.title,
-      required this.imageUrl,
-      required this.price,
-      required this.index,
-      required this.getData});
+  const ViewItemScreen({
+    super.key,
+    required this.title,
+    required this.imageUrl,
+    required this.price,
+    required this.index,
+    // required this.getData
+  });
 
   @override
   State<ViewItemScreen> createState() => _ViewItemScreenState();
 }
 
 class _ViewItemScreenState extends State<ViewItemScreen> {
+  // Function to delete the data
   Future<void> deleteData() async {
     Navigator.pop(context);
     try {
@@ -33,10 +35,10 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
       Response response = await Dio().delete(
           'https://flutterapitest12122002-default-rtdb.firebaseio.com/bucketlist/${widget.index}.json');
       print(response.data);
-      Navigator.pop(context);
+      Navigator.pop(context, true);
       setState(() {
         // Update the UI
-        widget.getData();
+        // widget.getData();
       });
     } catch (e) {
       // Handle the error
@@ -106,6 +108,7 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
               ),
             ),
           )),
+          Text('Price: \$${widget.price}'),
         ],
       ),
     );
