@@ -9,11 +9,16 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  List<dynamic> bucketListData = [];
+
   Future<void> getData() async {
     //Get Data from API using dio
     try {
       Response response = await Dio().get(
           'https://flutterapitest12122002-default-rtdb.firebaseio.com/bucketlist.json');
+      setState(() {
+        bucketListData = response.data;
+      });
       print(response.data);
     } catch (e) {
       // Handle the error here
@@ -42,9 +47,34 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         title: const Text('Bucket List'),
       ),
-      body: ElevatedButton(
-        onPressed: getData,
-        child: const Text('Get Data'),
+      body: Column(
+        children: [
+          ElevatedButton(
+            onPressed: getData,
+            child: const Text('Get Data'),
+          ),
+
+          // Display the data here
+          Expanded(
+            child: ListView.builder(
+                itemCount: bucketListData.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 25,
+                        backgroundImage:
+                            NetworkImage(bucketListData[index]['image']),
+                      ),
+                      title: Text(bucketListData[index]['item'] ?? ''),
+                      trailing:
+                          Text(bucketListData[index]['cost'].toString() ?? ''),
+                    ),
+                  );
+                }),
+          ),
+        ],
       ),
     );
   }
