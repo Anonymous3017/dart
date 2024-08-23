@@ -69,24 +69,35 @@ class _MainScreenState extends State<MainScreen> {
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              // Navigate to the ViewItemScreen when the ListTile is tapped
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return ViewItemScreen(
-                    title: bucketListData[index]['item'] ?? '',
-                    price: bucketListData[index]['cost'],
-                    imageUrl: bucketListData[index]['image'],
-                  );
-                }));
-              },
-              leading: CircleAvatar(
-                radius: 25,
-                backgroundImage: NetworkImage(bucketListData[index]['image']),
-              ),
-              title: Text(bucketListData[index]['item'] ?? ''),
-              trailing: Text(bucketListData[index]['cost'].toString()),
-            ),
+            // Check if the data is a Map before displaying it
+            child: (bucketListData[index] is Map)
+                ? ListTile(
+                    // Navigate to the ViewItemScreen when the ListTile is tapped
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return ViewItemScreen(
+                          getData: getData,
+                          index: index,
+                          title: bucketListData[index]['item'] ?? '',
+                          price: bucketListData[index]['cost'],
+                          imageUrl: bucketListData[index]['image'],
+                        );
+                      }));
+                    },
+                    leading: CircleAvatar(
+                      radius: 25,
+                      backgroundImage:
+                          // Check if the image URL is not null before displaying it
+                          NetworkImage(bucketListData[index]?['image'] ?? ''),
+                    ),
+                    title: Text(bucketListData[index]?['item'] ?? ''),
+                    trailing:
+                        Text(bucketListData[index]?['cost'].toString() ?? ''),
+                  )
+                :
+                // Show an empty SizedBox if the data is not a Map
+                const SizedBox(),
           );
         });
   }

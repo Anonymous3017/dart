@@ -1,20 +1,49 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ViewItemScreen extends StatefulWidget {
+  // String title is for the title of the item
   final String title;
+  // String imageUrl is for the image of the item
   final String imageUrl;
+  // int price is for the price of the item
   final int price;
+  // int index is for the index of the item
+  final int index;
+  // Function getData is for getting the data
+  final Function getData;
+
   const ViewItemScreen(
       {super.key,
       required this.title,
       required this.imageUrl,
-      required this.price});
+      required this.price,
+      required this.index,
+      required this.getData});
 
   @override
   State<ViewItemScreen> createState() => _ViewItemScreenState();
 }
 
 class _ViewItemScreenState extends State<ViewItemScreen> {
+  Future<void> deleteData() async {
+    Navigator.pop(context);
+    try {
+      // Delete the item
+      Response response = await Dio().delete(
+          'https://flutterapitest12122002-default-rtdb.firebaseio.com/bucketlist/${widget.index}.json');
+      print(response.data);
+      Navigator.pop(context);
+      setState(() {
+        // Update the UI
+        widget.getData();
+      });
+    } catch (e) {
+      // Handle the error
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +71,7 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
                         TextButton(
                             onPressed: () {
                               // Delete the item
-                              Navigator.pop(context);
+                              deleteData();
                             },
                             child: const Text('Delete')),
                       ],
@@ -65,6 +94,7 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
       ),
       body: Column(
         children: [
+          Text(widget.index.toString()),
           Center(
               child: Container(
             height: 300,
