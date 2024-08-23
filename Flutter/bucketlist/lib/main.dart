@@ -17,11 +17,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        '/home': (context) => const MainScreen(),
-        '/add': (context) => const AddBucketListScreen(),
-      },
-      initialRoute: 'home',
+      home: const MainScreen(),
       theme: ThemeData.light(useMaterial3: true),
     );
   }
