@@ -10,15 +10,22 @@ class AddBucketListScreen extends StatefulWidget {
 }
 
 class _AddBucketListScreenState extends State<AddBucketListScreen> {
+  TextEditingController itemText = TextEditingController();
+
+  TextEditingController costText = TextEditingController();
+
+  TextEditingController imageURLText = TextEditingController();
+
   // Function to add data to the API
   Future<void> addData(BuildContext context) async {
     // Add Data to API using dio
     try {
       Map<String, dynamic> data = {
-        "item": "Visit Nepal",
-        "cost": 10000,
-        "image":
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJOK-1spybg1oUFQ_aLDNE_umf10ZngjJ8Qg&s",
+        "item": itemText.text,
+        "cost": int.parse(costText.text),
+        "image": imageURLText.text.isEmpty
+            ? 'https://super-monitoring.com/blog/wp-content/uploads/2019/06/placeimg.png'
+            : imageURLText.text,
         "completed": false
       };
       // Add the data
@@ -39,9 +46,37 @@ class _AddBucketListScreenState extends State<AddBucketListScreen> {
       appBar: AppBar(
         title: const Text('Add Bucket List'),
       ),
-      body: ElevatedButton(
-        onPressed: () => addData(context),
-        child: const Text('Add Bucket List'),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              autofocus: true,
+              controller: itemText,
+              decoration: const InputDecoration(
+                labelText: 'Item',
+              ),
+            ),
+            TextField(
+              controller: costText,
+              decoration: const InputDecoration(
+                labelText: 'Cost',
+              ),
+            ),
+            TextField(
+              controller: imageURLText,
+              decoration: const InputDecoration(
+                labelText: 'Image URL',
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                addData(context);
+              },
+              child: const Text('Add'),
+            )
+          ],
+        ),
       ),
     );
   }
