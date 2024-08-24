@@ -66,6 +66,59 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
     }
   }
 
+  //Widget to showDilog for mark as complete and delete
+  Widget markAsCompleteWidget() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Mark as complete'),
+            content: const Text(
+                'Are you sure you want to mark this item as complete?'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cancel')),
+              TextButton(
+                  onPressed: () {
+                    // Mark the item as complete
+                    markAsComplete();
+                  },
+                  child: const Text('Mark as complete')),
+            ],
+          );
+        });
+    return Container(); // Add a return statement here
+  }
+
+  //Widget to showDilog for delete
+  Widget deleteWidget() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Delete item'),
+            content: const Text('Are you sure you want to delete this item?'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cancel')),
+              TextButton(
+                  onPressed: () {
+                    // Delete the item
+                    deleteData();
+                  },
+                  child: const Text('Delete')),
+            ],
+          );
+        });
+    return Container(); // Add a return statement here
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,52 +128,10 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
           PopupMenuButton(onSelected: (value) {
             if (value == 'complete') {
               // Mark the item as complete
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text('Mark as complete'),
-                      content: const Text(
-                          'Are you sure you want to mark this item as complete?'),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Cancel')),
-                        TextButton(
-                            onPressed: () {
-                              // Mark the item as complete
-                              markAsComplete();
-                            },
-                            child: const Text('Mark as complete')),
-                      ],
-                    );
-                  });
+              markAsCompleteWidget();
             } else if (value == 'delete') {
               // Delete the item
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text('Delete item'),
-                      content: const Text(
-                          'Are you sure you want to delete this item?'),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Cancel')),
-                        TextButton(
-                            onPressed: () {
-                              // Delete the item
-                              deleteData();
-                            },
-                            child: const Text('Delete')),
-                      ],
-                    );
-                  });
+              deleteWidget();
             }
           }, itemBuilder: (context) {
             return [
@@ -138,7 +149,6 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
       ),
       body: Column(
         children: [
-          Text(widget.index.toString()),
           Center(
               child: Container(
             height: 300,
@@ -150,7 +160,22 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
               ),
             ),
           )),
-          Text('Price: \$${widget.price}'),
+          const SizedBox(height: 20),
+          Text(
+            widget.title,
+            style: const TextStyle(fontSize: 24),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            'Price: \$${widget.price}',
+            style: const TextStyle(fontSize: 20),
+          ),
+          const SizedBox(height: 20),
+          //Elevated button for mark as complete
+          ElevatedButton(
+            onPressed: markAsCompleteWidget,
+            child: const Text('Mark as complete'),
+          ),
         ],
       ),
     );
