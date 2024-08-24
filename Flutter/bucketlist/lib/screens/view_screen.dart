@@ -170,11 +170,17 @@ class _ViewItemScreenState extends State<ViewItemScreen> {
             'Price: \$${widget.price}',
             style: const TextStyle(fontSize: 20),
           ),
-          const SizedBox(height: 20),
+          const Spacer(),
           //Elevated button for mark as complete
           ElevatedButton(
             onPressed: markAsCompleteWidget,
-            child: const Text('Mark as complete'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green[300],
+            ),
+            child: const Text('Mark as complete',
+                style: TextStyle(
+                  color: Colors.white,
+                )),
           ),
         ],
       ),
