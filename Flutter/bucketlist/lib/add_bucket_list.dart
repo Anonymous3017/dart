@@ -42,40 +42,64 @@ class _AddBucketListScreenState extends State<AddBucketListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var addForm = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Bucket List'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              autofocus: true,
-              controller: itemText,
-              decoration: const InputDecoration(
-                labelText: 'Item',
+        child: Form(
+          key: addForm,
+          child: Column(
+            children: [
+              TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value.toString().length <= 3) {
+                    return 'Please enter a name with more than 3 characters';
+                  }
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+                autofocus: true,
+                controller: itemText,
+                decoration: const InputDecoration(
+                  labelText: 'Item',
+                ),
               ),
-            ),
-            TextField(
-              controller: costText,
-              decoration: const InputDecoration(
-                labelText: 'Cost',
+              TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+                controller: costText,
+                decoration: const InputDecoration(
+                  labelText: 'Cost',
+                ),
               ),
-            ),
-            TextField(
-              controller: imageURLText,
-              decoration: const InputDecoration(
-                labelText: 'Image URL',
+              TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: imageURLText,
+                decoration: const InputDecoration(
+                  labelText: 'Image URL',
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                addData(context);
-              },
-              child: const Text('Add'),
-            )
-          ],
+              ElevatedButton(
+                onPressed: () {
+                  (addForm.currentState!.validate())
+                      ? addData(context)
+                      : print('Error');
+                },
+                child: const Text('Add'),
+              )
+            ],
+          ),
         ),
       ),
     );
