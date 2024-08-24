@@ -73,12 +73,11 @@ class _MainScreenState extends State<MainScreen> {
         : ListView.builder(
             itemCount: bucketListData.length,
             itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                // Check if the data is a Map and if the item is not completed
-                child: (bucketListData[index] is Map &&
-                        (!(bucketListData[index]?['completed'] ?? false)))
-                    ? ListTile(
+              return (bucketListData[index] is Map &&
+                      (!(bucketListData[index]?['completed'] ?? false)))
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
                         // Navigate to the ViewItemScreen when the ListTile is tapped
                         onTap: () {
                           Navigator.push(context,
@@ -107,11 +106,11 @@ class _MainScreenState extends State<MainScreen> {
                         title: Text(bucketListData[index]?['item'] ?? ''),
                         trailing: Text(
                             bucketListData[index]?['cost'].toString() ?? ''),
-                      )
-                    :
-                    // Show an empty SizedBox if the data is not a Map
-                    const SizedBox(),
-              );
+                      ),
+                    )
+                  :
+                  // Show an empty SizedBox if the data is not a Map
+                  const SizedBox();
             });
   }
 
@@ -121,8 +120,16 @@ class _MainScreenState extends State<MainScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const AddBucketListScreen();
-          }));
+            return AddBucketListScreen(
+              newIndex: bucketListData.length,
+            );
+          })).then(
+            (value) {
+              if (value == true) {
+                getData();
+              }
+            },
+          );
         },
         shape: const CircleBorder(),
         child: const Icon(Icons.add),
