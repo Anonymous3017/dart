@@ -64,47 +64,55 @@ class _MainScreenState extends State<MainScreen> {
 
   // Widget to show the list of data fetched from the API
   Widget ListDataWidget() {
-    return ListView.builder(
-        itemCount: bucketListData.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            // Check if the data is a Map before displaying it
-            child: (bucketListData[index] is Map)
-                ? ListTile(
-                    // Navigate to the ViewItemScreen when the ListTile is tapped
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return ViewItemScreen(
-                          // getData: getData,
-                          index: index,
-                          title: bucketListData[index]['item'] ?? '',
-                          price: bucketListData[index]['cost'],
-                          imageUrl: bucketListData[index]['image'],
-                        );
-                      })).then((onValue) {
-                        // Refresh the data when the ViewItemScreen is popped with a delete action in value
-                        if (onValue == true) {
-                          getData();
-                        }
-                      });
-                    },
-                    leading: CircleAvatar(
-                      radius: 25,
-                      backgroundImage:
-                          // Check if the image URL is not null before displaying it
-                          NetworkImage(bucketListData[index]?['image'] ?? ''),
-                    ),
-                    title: Text(bucketListData[index]?['item'] ?? ''),
-                    trailing:
-                        Text(bucketListData[index]?['cost'].toString() ?? ''),
-                  )
-                :
-                // Show an empty SizedBox if the data is not a Map
-                const SizedBox(),
-          );
-        });
+    List<dynamic> filteredList = bucketListData
+        .where((element) => !(element?['completed'] ?? false))
+        .toList();
+
+    return (filteredList.isEmpty)
+        ? const Center(child: Text("No data on Bucket List"))
+        : ListView.builder(
+            itemCount: bucketListData.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                // Check if the data is a Map and if the item is not completed
+                child: (bucketListData[index] is Map &&
+                        (!(bucketListData[index]?['completed'] ?? false)))
+                    ? ListTile(
+                        // Navigate to the ViewItemScreen when the ListTile is tapped
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return ViewItemScreen(
+                              // getData: getData,
+                              index: index,
+                              title: bucketListData[index]['item'] ?? '',
+                              price: bucketListData[index]['cost'],
+                              imageUrl: bucketListData[index]['image'],
+                            );
+                          })).then((onValue) {
+                            // Refresh the data when the ViewItemScreen is popped with a delete action in value
+                            if (onValue == true) {
+                              getData();
+                            }
+                          });
+                        },
+                        leading: CircleAvatar(
+                          radius: 25,
+                          backgroundImage:
+                              // Check if the image URL is not null before displaying it
+                              NetworkImage(
+                                  bucketListData[index]?['image'] ?? ''),
+                        ),
+                        title: Text(bucketListData[index]?['item'] ?? ''),
+                        trailing: Text(
+                            bucketListData[index]?['cost'].toString() ?? ''),
+                      )
+                    :
+                    // Show an empty SizedBox if the data is not a Map
+                    const SizedBox(),
+              );
+            });
   }
 
   @override
@@ -144,15 +152,9 @@ class _MainScreenState extends State<MainScreen> {
                 ?
                 // Show an error message if there is an error
                 errorWidget(errorMessage: 'An error occurred')
-                : (bucketListData.isEmpty)
-                    ?
-                    // Show a message if there is no data
-                    const Center(
-                        child: Text('No data found'),
-                      )
-                    :
-                    // Show the list of data if there is no error
-                    ListDataWidget(),
+                :
+                // Show the list of data if there is no error
+                ListDataWidget(),
       ),
     );
   }

@@ -25,16 +25,16 @@
 - [x] **State Management Solutions:** An introduction to different state management solutions like Provider, Riverpod, Bloc, etc. (Start with Provider as it's easy for beginners).
 
 ## 5. Navigation and Routing
-- [ ] **Navigator:** Using the Navigator to push and pop routes.
-- [ ] **Named Routes:** Defining and using named routes for navigation.
+- [x] **Navigator:** Using the Navigator to push and pop routes.
+- [x] **Named Routes:** Defining and using named routes for navigation.
 
 ## 6. Asynchronous Programming
-- [ ] **Future and async/await:** Handling asynchronous operations, such as fetching data from the internet.
-- [ ] **Stream:** Working with streams for real-time data and event handling.
+- [x] **Future and async/await:** Handling asynchronous operations, such as fetching data from the internet.
+- [x] **Stream:** Working with streams for real-time data and event handling.
 
 ## 7. Networking
-- [ ] **HTTP Requests:** Using the `http` package to make GET and POST requests.
-- [ ] **JSON Parsing:** Parsing JSON data into Dart objects.
+- [x] **HTTP Requests:** Using the `Dio` package to make GET and POST requests.
+- [x] **JSON Parsing:** Parsing JSON data into Dart objects.
 
 ## 8. Persistent Storage
 - [x] **Shared Preferences:** Storing simple key-value pairs locally.
