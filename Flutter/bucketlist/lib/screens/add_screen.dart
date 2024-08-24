@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class AddBucketListScreen extends StatefulWidget {
-  int newIndex;
-  AddBucketListScreen({super.key, required this.newIndex});
+  final int newIndex;
+  const AddBucketListScreen({super.key, required this.newIndex});
 
   @override
   State<AddBucketListScreen> createState() => _AddBucketListScreenState();
@@ -75,6 +75,10 @@ class _AddBucketListScreenState extends State<AddBucketListScreen> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter some text';
+                  }
+                  // must be a number
+                  if (int.tryParse(value.toString()) == null) {
+                    return 'Please enter a number';
                   }
                   return null;
                 },
