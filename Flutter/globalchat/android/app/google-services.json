@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "698604054264",
+    "project_id": "globalchat-f8th",
+    "storage_bucket": "globalchat-f8th.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:698604054264:android:2b63eb90af3614d8b07d0d",
+        "android_client_info": {
+          "package_name": "com.f8th.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUhipr4-7bYzgPaMpvUHkvEOQ8H7g2hcU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
