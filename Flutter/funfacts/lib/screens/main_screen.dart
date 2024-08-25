@@ -65,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 Expanded(
                   child: PageView.builder(
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.vertical,
                     itemCount: facts.length,
                     itemBuilder: (context, index) {
                       return Container(
@@ -88,7 +88,7 @@ class _MainScreenState extends State<MainScreen> {
                   color: Colors.blue,
                   child: const Center(
                     child: Text(
-                      'Swipe to see more facts',
+                      'Swipe up for more facts',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
