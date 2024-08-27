@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:globalchat/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:globalchat/screens/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,15 +20,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+          brightness: Brightness.light,
+          useMaterial3: true,
+          fontFamily: "Poppins"),
       title: 'Global Chat',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Global Chat'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      home: SplashScreen(),
     );
   }
 }
