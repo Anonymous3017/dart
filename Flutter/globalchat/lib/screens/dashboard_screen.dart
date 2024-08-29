@@ -37,7 +37,7 @@ class _DashboardStateScreen extends State<DashboardScreen> {
                   (route) => false,
                 );
               },
-              child: const Text("Logout"),
+              child: const Text("Signout"),
             ),
           ],
         ));

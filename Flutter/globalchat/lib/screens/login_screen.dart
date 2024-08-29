@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:globalchat/controllers/login_controller.dart';
 import 'package:globalchat/controllers/signup_controller.dart';
 import 'package:globalchat/screens/dashboard_screen.dart';
+import 'package:globalchat/screens/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -79,6 +80,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: const Text("Login"),
               ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  const Text("Don't have an account?"),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignupScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text("Signup"),
+                  )
+                ],
+              )
             ],
           ),
         ),
