@@ -20,16 +20,22 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Signup"),
+        title: const Text(""),
       ),
       body: Form(
         key: userFormKey,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Signup form
-              const Text("Signup Screen"),
+              SizedBox(
+                height: 100,
+                width: 100,
+                child: Image.asset(
+                  "assets/images/logo.png",
+                ),
+              ),
               const SizedBox(height: 23),
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -64,19 +70,30 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  // Signup logic
-                  if (userFormKey.currentState!.validate()) {
-                    // Create an account
-                    SignupController.createAccount(
-                      context: context,
-                      emailController: emailController.text,
-                      passwordController: passwordController.text,
-                    );
-                  }
-                },
-                child: const Text("Create an Account"),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(0, 50),
+                        foregroundColor: Colors.white,
+                        backgroundColor: Color.fromARGB(255, 63, 5, 10),
+                      ),
+                      onPressed: () {
+                        // login logic
+                        if (userFormKey.currentState!.validate()) {
+                          // Signup an account
+                          SignupController.createAccount(
+                            context: context,
+                            emailController: emailController.text,
+                            passwordController: passwordController.text,
+                          );
+                        }
+                      },
+                      child: const Text("Create an Account"),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

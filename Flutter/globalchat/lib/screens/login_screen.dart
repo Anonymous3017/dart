@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:globalchat/controllers/login_controller.dart';
-import 'package:globalchat/controllers/signup_controller.dart';
-import 'package:globalchat/screens/dashboard_screen.dart';
 import 'package:globalchat/screens/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,17 +18,20 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login"),
-      ),
       body: Form(
         key: userFormKey,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Signup form
-              const Text("Login Screen"),
+              SizedBox(
+                height: 100,
+                width: 100,
+                child: Image.asset(
+                  "assets/images/logo.png",
+                ),
+              ),
               const SizedBox(height: 23),
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -66,19 +66,30 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  // login logic
-                  if (userFormKey.currentState!.validate()) {
-                    // Login an account
-                    LoginController.login(
-                      context: context,
-                      emailController: emailController.text,
-                      passwordController: passwordController.text,
-                    );
-                  }
-                },
-                child: const Text("Login"),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(0, 50),
+                        foregroundColor: Colors.white,
+                        backgroundColor: Color.fromARGB(255, 63, 5, 10),
+                      ),
+                      onPressed: () {
+                        // login logic
+                        if (userFormKey.currentState!.validate()) {
+                          // Login an account
+                          LoginController.login(
+                            context: context,
+                            emailController: emailController.text,
+                            passwordController: passwordController.text,
+                          );
+                        }
+                      },
+                      child: const Text("Login"),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               Row(
