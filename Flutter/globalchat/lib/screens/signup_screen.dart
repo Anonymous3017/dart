@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:globalchat/controllers/signup_controller.dart';
 import 'package:globalchat/screens/dashboard_screen.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -14,50 +15,6 @@ class _SignupScreenState extends State<SignupScreen> {
   final userFormKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  Future<void> createAccount() async {
-    // Create an account
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      SnackBar messageSnackBar = const SnackBar(
-        backgroundColor: Colors.green,
-        content: Text("Account created successfully"),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(messageSnackBar);
-
-      // Navigate to the dashboard
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const DashboardScreen()),
-        (route) => false,
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        SnackBar messageSnackBar = const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text("The password provided is too weak."),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(messageSnackBar);
-      } else if (e.code == 'email-already-in-use') {
-        SnackBar messageSnackBar = const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text("The account already exists for that email."),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(messageSnackBar);
-      }
-    } catch (e) {
-      SnackBar messageSnackBar = SnackBar(
-        backgroundColor: Colors.red,
-        content: Text(e.toString()),
-      );
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(messageSnackBar);
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +69,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   // Signup logic
                   if (userFormKey.currentState!.validate()) {
                     // Create an account
-                    createAccount();
+                    SignupController.createAccount(
+                      context: context,
+                      emailController: emailController.text,
+                      passwordController: passwordController.text,
+                    );
                   }
                 },
                 child: const Text("Create an Account"),
