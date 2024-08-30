@@ -22,11 +22,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(userProvider.userName),
+            CircleAvatar(
+              radius: 50,
+              child: Text(userProvider.userName[0]),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(userProvider.userName,
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+            SizedBox(
+              height: 10,
+            ),
             Text(userProvider.userEmail),
-            Text(userProvider.userId),
+            ElevatedButton(onPressed: () {}, child: Text('Edit Name'))
           ],
         ),
       ),
