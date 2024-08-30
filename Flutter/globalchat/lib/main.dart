@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:globalchat/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:globalchat/providers/user_provider.dart';
 import 'package:globalchat/screens/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      child: MyApp(), create: (context) => UserProvider()));
 }
 
 class MyApp extends StatefulWidget {

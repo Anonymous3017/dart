@@ -1,0 +1,148 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "globalchat",
+            "cwd": "Flutter/globalchat",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "globalchat (profile mode)",
+            "cwd": "Flutter/globalchat",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "globalchat (release mode)",
+            "cwd": "Flutter/globalchat",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "billionairapp",
+            "cwd": "Flutter/billionairapp",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "billionairapp (profile mode)",
+            "cwd": "Flutter/billionairapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "billionairapp (release mode)",
+            "cwd": "Flutter/billionairapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "bucketlist",
+            "cwd": "Flutter/bucketlist",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "bucketlist (profile mode)",
+            "cwd": "Flutter/bucketlist",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "bucketlist (release mode)",
+            "cwd": "Flutter/bucketlist",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "funfacts",
+            "cwd": "Flutter/funfacts",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "funfacts (profile mode)",
+            "cwd": "Flutter/funfacts",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "funfacts (release mode)",
+            "cwd": "Flutter/funfacts",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "helloflutter",
+            "cwd": "Flutter/helloflutter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "helloflutter (profile mode)",
+            "cwd": "Flutter/helloflutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "helloflutter (release mode)",
+            "cwd": "Flutter/helloflutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "hiiflutter",
+            "cwd": "Flutter/hiiflutter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "hiiflutter (profile mode)",
+            "cwd": "Flutter/hiiflutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "hiiflutter (release mode)",
+            "cwd": "Flutter/hiiflutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "todoapp",
+            "cwd": "Flutter/todoapp",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "todoapp (profile mode)",
+            "cwd": "Flutter/todoapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "todoapp (release mode)",
+            "cwd": "Flutter/todoapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
