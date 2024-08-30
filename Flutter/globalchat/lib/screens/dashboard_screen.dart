@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:globalchat/screens/profile_screen.dart';
@@ -12,6 +13,26 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardStateScreen extends State<DashboardScreen> {
   var user = FirebaseAuth.instance.currentUser;
+  var db = FirebaseFirestore.instance;
+
+  List<Map<String, dynamic>> chatroomsList = [];
+
+  void getChatrooms() async {
+    //get chatrooms
+    await db.collection("chatrooms").get().then((dataSnapshot) {
+      dataSnapshot.docs.forEach((singleChatroomData) {
+        chatroomsList.add(singleChatroomData.data());
+      });
+    });
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getChatrooms();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,16 +87,10 @@ class _DashboardStateScreen extends State<DashboardScreen> {
             ),
           ),
         ),
-        body: Column(
-          children: [
-            const SizedBox(height: 20),
-            Center(
-              child: Text(
-                "Welcome ${user?.email ?? "User"}",
-                style: const TextStyle(fontSize: 20),
-              ),
-            ),
-          ],
-        ));
+        body: ListView.builder(
+            itemCount: chatroomsList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Text(chatroomsList[index]["chatroom_name"] ?? "");
+            }));
   }
 }
