@@ -90,7 +90,13 @@ class _DashboardStateScreen extends State<DashboardScreen> {
         body: ListView.builder(
             itemCount: chatroomsList.length,
             itemBuilder: (BuildContext context, int index) {
-              return Text(chatroomsList[index]["chatroom_name"] ?? "");
+              return ListTile(
+                leading: CircleAvatar(
+                  child: Text(chatroomsList[index]["chatroom_name"]![0]),
+                ),
+                title: Text(chatroomsList[index]["chatroom_name"] ?? ""),
+                subtitle: Text(chatroomsList[index]["desc"] ?? ""),
+              );
             }));
   }
 }
