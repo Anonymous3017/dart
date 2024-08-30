@@ -15,6 +15,8 @@ class _SignupScreenState extends State<SignupScreen> {
   final userFormKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController country = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,82 +24,122 @@ class _SignupScreenState extends State<SignupScreen> {
       appBar: AppBar(
         title: const Text(""),
       ),
-      body: Form(
-        key: userFormKey,
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 100,
-                width: 100,
-                child: Image.asset(
-                  "assets/images/logo.png",
-                ),
-              ),
-              const SizedBox(height: 23),
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                controller: emailController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please enter Email";
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  hintText: "Please enter your email",
-                  labelText: "Email",
-                ),
-              ),
-              const SizedBox(height: 23),
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                controller: passwordController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please enter Password";
-                  }
-                  return null;
-                },
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: const InputDecoration(
-                  hintText: "Enter your password",
-                  labelText: "Password",
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(0, 50),
-                        foregroundColor: Colors.white,
-                        backgroundColor: Color.fromARGB(255, 63, 5, 10),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Form(
+                key: userFormKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Image.asset(
+                          "assets/images/logo.png",
+                        ),
                       ),
-                      onPressed: () {
-                        // login logic
-                        if (userFormKey.currentState!.validate()) {
-                          // Signup an account
-                          SignupController.createAccount(
-                            context: context,
-                            emailController: emailController.text,
-                            passwordController: passwordController.text,
-                          );
-                        }
-                      },
-                      child: const Text("Create an Account"),
-                    ),
+                      const SizedBox(height: 23),
+                      TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        controller: emailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter Email";
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                          hintText: "Please enter your email",
+                          labelText: "Email",
+                        ),
+                      ),
+                      const SizedBox(height: 23),
+                      TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        controller: passwordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter Password";
+                          }
+                          return null;
+                        },
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        decoration: const InputDecoration(
+                          hintText: "Enter your password",
+                          labelText: "Password",
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        controller: name,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter Name";
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                          hintText: "Enter your name",
+                          labelText: "Name",
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        controller: country,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter Country";
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                          hintText: "Enter your country",
+                          labelText: "Country",
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: Size(0, 50),
+                                foregroundColor: Colors.white,
+                                backgroundColor: Color.fromARGB(255, 63, 5, 10),
+                              ),
+                              onPressed: () {
+                                // login logic
+                                if (userFormKey.currentState!.validate()) {
+                                  // Signup an account
+                                  SignupController.createAccount(
+                                    context: context,
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    name: name.text,
+                                    country: country.text,
+                                  );
+                                }
+                              },
+                              child: const Text("Create an Account"),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

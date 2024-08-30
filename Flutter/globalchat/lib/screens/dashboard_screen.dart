@@ -16,7 +16,51 @@ class _DashboardStateScreen extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Dashboard"),
+          title: const Text("Dev Chat"),
+        ),
+        drawer: Drawer(
+          child: Container(
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                ListTile(
+                  title: const Text("Home"),
+                  leading: const Icon(Icons.home),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: const Text("Profile"),
+                  leading: const Icon(Icons.person),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: const Text("Settings"),
+                  leading: const Icon(Icons.settings),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                //logout
+                ListTile(
+                  title: const Text("Logout"),
+                  leading: const Icon(Icons.logout),
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SplashScreen()),
+                      (route) => false,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
         body: Column(
           children: [
@@ -26,18 +70,6 @@ class _DashboardStateScreen extends State<DashboardScreen> {
                 "Welcome ${user?.email ?? "User"}",
                 style: const TextStyle(fontSize: 20),
               ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut();
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SplashScreen()),
-                  (route) => false,
-                );
-              },
-              child: const Text("Signout"),
             ),
           ],
         ));

@@ -15,7 +15,7 @@ class LoginController {
       );
       SnackBar messageSnackBar = const SnackBar(
         backgroundColor: Colors.green,
-        content: Text("Account created successfully"),
+        content: Text("Login successful"),
       );
       ScaffoldMessenger.of(context).showSnackBar(messageSnackBar);
 
