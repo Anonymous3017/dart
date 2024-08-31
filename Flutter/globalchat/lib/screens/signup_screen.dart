@@ -18,6 +18,8 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController name = TextEditingController();
   TextEditingController country = TextEditingController();
 
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,20 +117,31 @@ class _SignupScreenState extends State<SignupScreen> {
                                 foregroundColor: Colors.white,
                                 backgroundColor: Color.fromARGB(255, 63, 5, 10),
                               ),
-                              onPressed: () {
-                                // login logic
+                              onPressed: () async {
+                                // signup logic
+                                isLoading = true;
+                                setState(() {});
                                 if (userFormKey.currentState!.validate()) {
                                   // Signup an account
-                                  SignupController.createAccount(
+                                  await SignupController.createAccount(
                                     context: context,
                                     email: emailController.text,
                                     password: passwordController.text,
                                     name: name.text,
                                     country: country.text,
                                   );
+                                  isLoading = false;
+                                  setState(() {});
                                 }
                               },
-                              child: const Text("Create an Account"),
+                              child: isLoading
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  : const Text("Sign Up"),
                             ),
                           ),
                         ],

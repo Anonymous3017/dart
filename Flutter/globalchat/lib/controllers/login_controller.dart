@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:globalchat/screens/dashboard_screen.dart';
+import 'package:globalchat/screens/splash_screen.dart';
 
 class LoginController {
   static Future<void> login(
@@ -22,7 +22,7 @@ class LoginController {
       // Navigate to the dashboard
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+        MaterialPageRoute(builder: (context) => const SplashScreen()),
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {

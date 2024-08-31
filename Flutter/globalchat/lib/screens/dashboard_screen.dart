@@ -24,9 +24,9 @@ class _DashboardStateScreen extends State<DashboardScreen> {
   void getChatrooms() async {
     //get chatrooms
     await db.collection("chatrooms").get().then((dataSnapshot) {
-      dataSnapshot.docs.forEach((singleChatroomData) {
+      for (var singleChatroomData in dataSnapshot.docs) {
         chatroomsList.add(singleChatroomData.data());
-      });
+      }
     });
     setState(() {});
   }
