@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:globalchat/providers/user_provider.dart';
+import 'package:globalchat/screens/edit_profile.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -37,7 +38,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 10,
             ),
             Text(userProvider.userEmail),
-            ElevatedButton(onPressed: () {}, child: Text('Edit Name'))
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const EditProfileScreen()));
+                },
+                child: Text('Edit Name'))
           ],
         ),
       ),
