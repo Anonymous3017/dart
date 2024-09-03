@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:globalchat/providers/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +19,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     nameText.text = Provider.of<UserProvider>(context, listen: false).userName;
     super.initState();
   }
@@ -51,7 +49,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Navigator.pop(context, true);
               }
             },
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Icon(Icons.check),
             ),
@@ -61,7 +59,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: Container(
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Form(
             key: editProfileFormKey,
             child: Column(
@@ -75,7 +73,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     return null;
                   },
                   controller: nameText,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: "Name",
                       hintText: "Enter your name",
                       border: OutlineInputBorder()),

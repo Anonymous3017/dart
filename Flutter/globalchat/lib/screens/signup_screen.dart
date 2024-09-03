@@ -1,8 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:globalchat/controllers/signup_controller.dart';
-import 'package:globalchat/screens/dashboard_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -113,9 +110,10 @@ class _SignupScreenState extends State<SignupScreen> {
                           Expanded(
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                minimumSize: Size(0, 50),
+                                minimumSize: const Size(0, 50),
                                 foregroundColor: Colors.white,
-                                backgroundColor: Color.fromARGB(255, 63, 5, 10),
+                                backgroundColor:
+                                    const Color.fromARGB(255, 63, 5, 10),
                               ),
                               onPressed: () async {
                                 // signup logic
@@ -135,9 +133,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                 }
                               },
                               child: isLoading
-                                  ? Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: const CircularProgressIndicator(
+                                  ? const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: CircularProgressIndicator(
                                         color: Colors.white,
                                       ),
                                     )

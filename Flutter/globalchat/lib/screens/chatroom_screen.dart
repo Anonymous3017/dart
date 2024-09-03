@@ -1,17 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:globalchat/providers/user_provider.dart';
 import 'package:globalchat/screens/messageList.dart';
 import 'package:provider/provider.dart';
 
 class ChatroomScreen extends StatefulWidget {
-  String chatroomName;
-  String chatroomId;
+  final String chatroomName;
+  final String chatroomId;
 
   ChatroomScreen(
-      {super.key, required this.chatroomName, required this.chatroomId});
+      {Key? key, required this.chatroomName, required this.chatroomId})
+      : super(key: key);
 
   @override
   State<ChatroomScreen> createState() => _ChatroomScreenState();
@@ -35,10 +34,10 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
       "timestamp": FieldValue.serverTimestamp()
     };
 
+    // save message to firestore
     try {
       await db.collection("messages").add(messageToSend);
     } on Exception catch (e) {
-      // TODO
       print(e);
     }
   }

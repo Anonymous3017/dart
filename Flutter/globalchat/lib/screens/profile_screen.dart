@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:globalchat/providers/user_provider.dart';
 import 'package:globalchat/screens/edit_profile.dart';
@@ -29,12 +27,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               radius: 50,
               child: Text(userProvider.userName[0]),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(userProvider.userName,
                 style: const TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(userProvider.userEmail),
@@ -45,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       MaterialPageRoute(
                           builder: (context) => const EditProfileScreen()));
                 },
-                child: Text('Edit Name'))
+                child: const Text('Edit Name'))
           ],
         ),
       ),
