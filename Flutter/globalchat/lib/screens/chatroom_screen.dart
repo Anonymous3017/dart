@@ -52,9 +52,46 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
         child: Column(
           children: [
             Expanded(
-                child: Container(
-              color: Colors.white,
-            )),
+              child: StreamBuilder(
+                stream: db
+                    .collection("messages")
+                    .where("chatroom_id", isEqualTo: widget.chatroomId)
+                    .orderBy("timestamp", descending: false)
+                    .snapshots(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  print('Connection State: ${snapshot.connectionState}');
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.hasError) {
+                    print('Error: ${snapshot.error}');
+                    return Center(
+                      child: Text('Error: ${snapshot.error}'),
+                    );
+                  } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    print(
+                        'No messages found for chatroom: ${widget.chatroomId}');
+                    return const Center(
+                      child: Text('No messages found.'),
+                    );
+                  } else {
+                    print('Messages loaded: ${snapshot.data!.docs.length}');
+                    return ListView.builder(
+                      reverse: true,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(snapshot.data!.docs[index]["text"]),
+                          subtitle:
+                              Text(snapshot.data!.docs[index]["sender_name"]),
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
+            ),
             Container(
               color: Colors.grey[200],
               child: Padding(
