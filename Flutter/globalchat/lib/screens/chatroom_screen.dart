@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:globalchat/providers/user_provider.dart';
+import 'package:globalchat/screens/messageList.dart';
 import 'package:provider/provider.dart';
 
 class ChatroomScreen extends StatefulWidget {
@@ -81,44 +82,9 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
                     );
                   } else {
                     print('Messages loaded: ${snapshot.data!.docs.length}');
-                    return ListView.builder(
-                      reverse: true,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        var message = snapshot
-                            .data!.docs[snapshot.data!.docs.length - 1 - index];
-                        bool isCurrentUser =
-                            message["sender_id"] == currentUserId;
-                        return Align(
-                          alignment: isCurrentUser
-                              ? Alignment.centerRight
-                              : Alignment.centerLeft,
-                          child: Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 10),
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: isCurrentUser
-                                  ? Colors.blue[100]
-                                  : Colors.grey[300],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  message["sender_name"],
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(height: 5),
-                                Text(message["text"]),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
+                    return MessageList(
+                      messages: snapshot.data!.docs,
+                      currentUserId: currentUserId,
                     );
                   }
                 },
