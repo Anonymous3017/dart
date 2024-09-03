@@ -29,6 +29,7 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
     Map<String, dynamic> messageToSend = {
       "text": messageText.text,
       "sender_name": Provider.of<UserProvider>(context, listen: false).userName,
+      "sender_id": Provider.of<UserProvider>(context, listen: false).userId,
       "chatroom_id": widget.chatroomId,
       "timestamp": FieldValue.serverTimestamp()
     };
@@ -43,6 +44,9 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentUserId =
+        Provider.of<UserProvider>(context, listen: false).userId;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.chatroomName),
@@ -81,10 +85,38 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
                       reverse: true,
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(snapshot.data!.docs[index]["text"]),
-                          subtitle:
-                              Text(snapshot.data!.docs[index]["sender_name"]),
+                        var message = snapshot
+                            .data!.docs[snapshot.data!.docs.length - 1 - index];
+                        bool isCurrentUser =
+                            message["sender_id"] == currentUserId;
+                        return Align(
+                          alignment: isCurrentUser
+                              ? Alignment.centerRight
+                              : Alignment.centerLeft,
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10),
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: isCurrentUser
+                                  ? Colors.blue[100]
+                                  : Colors.grey[300],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  message["sender_name"],
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(message["text"]),
+                              ],
+                            ),
+                          ),
                         );
                       },
                     );
