@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:globalchat/controllers/login_controller.dart';
 import 'package:globalchat/screens/signup_screen.dart';
 
@@ -73,9 +72,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        minimumSize: Size(0, 50),
+                        minimumSize: const Size(0, 50),
                         foregroundColor: Colors.white,
-                        backgroundColor: Color.fromARGB(255, 63, 5, 10),
+                        backgroundColor: const Color.fromARGB(255, 63, 5, 10),
                       ),
                       onPressed: () async {
                         // login logic
@@ -93,8 +92,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       },
                       child: isLoading
-                          ? Padding(
-                              padding: const EdgeInsets.all(8.0),
+                          ? const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: CircularProgressIndicator(
                                 color: Colors.white,
                               ),

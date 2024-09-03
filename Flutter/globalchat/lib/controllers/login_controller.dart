@@ -26,19 +26,34 @@ class LoginController {
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        SnackBar messageSnackBar = const SnackBar(
+      SnackBar messageSnackBar;
+      if (e.code == 'user-not-found') {
+        messageSnackBar = const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("Email not registered."),
+        );
+      } else if (e.code == 'wrong-password') {
+        messageSnackBar = const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("Incorrect password."),
+        );
+      } else if (e.code == 'weak-password') {
+        messageSnackBar = const SnackBar(
           backgroundColor: Colors.red,
           content: Text("The password provided is too weak."),
         );
-        ScaffoldMessenger.of(context).showSnackBar(messageSnackBar);
       } else if (e.code == 'email-already-in-use') {
-        SnackBar messageSnackBar = const SnackBar(
+        messageSnackBar = const SnackBar(
           backgroundColor: Colors.red,
           content: Text("The account already exists for that email."),
         );
-        ScaffoldMessenger.of(context).showSnackBar(messageSnackBar);
+      } else {
+        messageSnackBar = const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("An unknown error occurred."),
+        );
       }
+      ScaffoldMessenger.of(context).showSnackBar(messageSnackBar);
     } catch (e) {
       SnackBar messageSnackBar = SnackBar(
         backgroundColor: Colors.red,
