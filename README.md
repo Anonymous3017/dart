@@ -38,8 +38,8 @@
 
 ## 8. Persistent Storage
 - [x] **Shared Preferences:** Storing simple key-value pairs locally.
-- [ ] **Local Database:** Using SQLite or Hive for local database storage (Hive is more straightforward for beginners).
+- [x] **Local Database:** Using SQLite or Hive for local database storage (Hive is more straightforward for beginners).
 
 ## 9. Debugging and Testing
-- [ ] **Debugging Tools:** Using Flutter’s debugging tools and the Dart DevTools.
-- [ ] **Writing Tests:** Writing basic unit tests and widget tests.
+- [x] **Debugging Tools:** Using Flutter’s debugging tools and the Dart DevTools.
+- [x] **Writing Tests:** Writing basic unit tests and widget tests.
