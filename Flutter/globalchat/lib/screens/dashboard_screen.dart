@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:globalchat/providers/user_provider.dart';
 import 'package:globalchat/screens/chatroom_screen.dart';
 import 'package:globalchat/screens/profile_screen.dart';
+import 'package:globalchat/screens/settings_screen.dart';
 import 'package:globalchat/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -93,7 +94,10 @@ class _DashboardStateScreen extends State<DashboardScreen> {
                   title: const Text("Settings"),
                   leading: const Icon(Icons.settings),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SettingsScreen()));
                   },
                 ),
                 //logout

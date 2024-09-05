@@ -21,14 +21,26 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    Provider.of<UserProvider>(context, listen: false).getThemeMode();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<UserProvider>(context);
     return MaterialApp(
-      theme: ThemeData(
-          brightness: Brightness.light,
-          useMaterial3: true,
-          fontFamily: "Poppins"),
+      theme: (themeProvider.isDarkModeChecked)
+          ? ThemeData(
+              brightness: Brightness.dark,
+              useMaterial3: true,
+              fontFamily: "Poppins")
+          : ThemeData(
+              brightness: Brightness.light,
+              useMaterial3: true,
+              fontFamily: "Poppins"),
       title: 'Global Chat',
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

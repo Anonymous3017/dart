@@ -46,6 +46,7 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
   Widget build(BuildContext context) {
     final currentUserId =
         Provider.of<UserProvider>(context, listen: false).userId;
+    var themeProvider = Provider.of<UserProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -90,13 +91,23 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
               ),
             ),
             Container(
-              color: Colors.grey[200],
+              color:
+                  // if dark mode is enabled, set the color to black12, else set it to grey[200]
+                  (themeProvider.isDarkModeChecked)
+                      ? Colors.black12
+                      : Colors.grey[200],
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Expanded(
                         child: TextField(
+                      style: TextStyle(
+                          color:
+                              // if dark mode is enabled, set the color to white, else set it to black
+                              (themeProvider.isDarkModeChecked)
+                                  ? Colors.white
+                                  : Colors.black),
                       controller: messageText,
                       decoration: const InputDecoration(
                           border: InputBorder.none, hintText: "Type a message"),

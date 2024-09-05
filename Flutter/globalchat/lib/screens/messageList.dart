@@ -20,7 +20,8 @@ class MessageList extends StatelessWidget {
         var message = messages[messages.length - 1 - index];
         bool isCurrentUser = message["sender_id"] == currentUserId;
         return Align(
-          alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+          alignment:
+              isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             padding: const EdgeInsets.all(10),
@@ -35,10 +36,14 @@ class MessageList extends StatelessWidget {
                   message["sender_name"],
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 5),
-                Text(message["text"]),
+                Text(message["text"],
+                    style: const TextStyle(
+                      color: Colors.black,
+                    )),
               ],
             ),
           ),
