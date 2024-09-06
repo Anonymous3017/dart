@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:globalchat/widgets/bottom_nav.dart';
 import 'package:globalchat/widgets/theme_switcher.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -19,6 +20,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           ThemeSwitcher(),
         ],
+      ),
+      bottomNavigationBar: const BottomNav(
+        selectedIndexNo: 2,
       ),
     );
   }

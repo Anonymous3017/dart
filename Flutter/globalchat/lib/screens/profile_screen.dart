@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:globalchat/providers/user_provider.dart';
 import 'package:globalchat/screens/edit_profile.dart';
+import 'package:globalchat/widgets/bottom_nav.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -46,6 +47,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: const Text('Edit Name'))
           ],
         ),
+      ),
+      bottomNavigationBar: const BottomNav(
+        selectedIndexNo: 3,
       ),
     );
   }
