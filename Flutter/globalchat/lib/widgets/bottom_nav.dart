@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:globalchat/screens/dashboard_screen.dart';
 import 'package:globalchat/screens/profile_screen.dart';
 import 'package:globalchat/screens/settings_screen.dart';
-import 'package:globalchat/screens/splash_screen.dart';
+import 'package:globalchat/screens/video_screen.dart';
 
 class BottomNav extends StatefulWidget {
   final int selectedIndexNo;
@@ -28,7 +28,7 @@ class _BottomNavState extends State<BottomNav> {
         } else if (index == 1) {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => const SplashScreen()),
+              MaterialPageRoute(builder: (context) => const VideoScreen()),
               (route) => false);
         } else if (index == 0) {
           Navigator.pushAndRemoveUntil(
