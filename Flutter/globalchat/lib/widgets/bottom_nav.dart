@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:globalchat/providers/user_provider.dart';
 import 'package:globalchat/screens/dashboard_screen.dart';
 import 'package:globalchat/screens/profile_screen.dart';
 import 'package:globalchat/screens/settings_screen.dart';
 import 'package:globalchat/screens/video_screen.dart';
+import 'package:provider/provider.dart';
 
 class BottomNav extends StatefulWidget {
   final int selectedIndexNo;
@@ -15,7 +17,11 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<UserProvider>(context);
     return NavigationBar(
+      backgroundColor:
+          (themeProvider.isDarkModeChecked) ? Colors.black12 : Colors.grey[200],
+      height: 65,
       animationDuration: const Duration(seconds: 1),
       selectedIndex: widget.selectedIndexNo,
       onDestinationSelected: (index) {
