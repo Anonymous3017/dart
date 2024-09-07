@@ -22,6 +22,7 @@ class _DashboardStateScreen extends State<DashboardScreen> {
 
   List<Map<String, dynamic>> chatroomsList = [];
   List<String> chatroomIds = [];
+  bool isLoading = true; // Add this line
 
   void getChatrooms() async {
     //get chatrooms
@@ -31,7 +32,9 @@ class _DashboardStateScreen extends State<DashboardScreen> {
         chatroomIds.add(singleChatroomData.id.toString());
       }
     });
-    setState(() {});
+    setState(() {
+      isLoading = false; // Update this line
+    });
   }
 
   @override
@@ -61,28 +64,34 @@ class _DashboardStateScreen extends State<DashboardScreen> {
         ),
       ),
       drawer: AppDrawer(),
-      body: ListView.builder(
-          itemCount: chatroomsList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ChatroomScreen(
-                            chatroomName:
-                                chatroomsList[index]["chatroom_name"] ?? "",
-                            chatroomId: chatroomIds[index])));
-              },
-              leading: CircleAvatar(
-                backgroundColor: Colors.blueGrey[900],
-                child: Text(chatroomsList[index]["chatroom_name"]![0],
-                    style: TextStyle(color: Colors.white)),
-              ),
-              title: Text(chatroomsList[index]["chatroom_name"] ?? ""),
-              subtitle: Text(chatroomsList[index]["desc"] ?? ""),
-            );
-          }),
+      body: isLoading // Add this line
+          ? const Center(child: CircularProgressIndicator()) // Add this line
+          : chatroomsList.isEmpty // Add this line
+              ? const Center(
+                  child: Text('No chatrooms available')) // Add this line
+              : ListView.builder(
+                  itemCount: chatroomsList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChatroomScreen(
+                                    chatroomName: chatroomsList[index]
+                                            ["chatroom_name"] ??
+                                        "",
+                                    chatroomId: chatroomIds[index])));
+                      },
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.blueGrey[900],
+                        child: Text(chatroomsList[index]["chatroom_name"]![0],
+                            style: TextStyle(color: Colors.white)),
+                      ),
+                      title: Text(chatroomsList[index]["chatroom_name"] ?? ""),
+                      subtitle: Text(chatroomsList[index]["desc"] ?? ""),
+                    );
+                  }),
       bottomNavigationBar: const BottomNav(
         selectedIndexNo: 0,
       ),

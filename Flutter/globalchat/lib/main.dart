@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
       theme: (themeProvider.isDarkModeChecked)
           ? ThemeData(
               brightness: Brightness.dark,
-              useMaterial3: true,
+              useMaterial3: true, 
               fontFamily: "Poppins")
           : ThemeData(
               brightness: Brightness.light,

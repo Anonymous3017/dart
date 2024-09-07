@@ -26,14 +26,14 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     });
 
-    // TODO: implement initState
     super.initState();
   }
 
-  void openDashboard() {
-    Provider.of<UserProvider>(context, listen: false).getUserDetails();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => DashboardScreen()));
+  Future<void> openDashboard() async {
+    await Provider.of<UserProvider>(context, listen: false).getUserDetails();
+    if (!mounted) return;
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => const DashboardScreen()));
   }
 
   void openLogin() {

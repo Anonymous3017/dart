@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 class VideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
 
-  const VideoPlayerWidget({required this.videoUrl, Key? key}) : super(key: key);
+  const VideoPlayerWidget({required this.videoUrl, super.key});
 
   @override
   _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();

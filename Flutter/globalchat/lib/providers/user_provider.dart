@@ -11,7 +11,7 @@ class UserProvider with ChangeNotifier {
 
   var db = FirebaseFirestore.instance;
   Map<String, dynamic>? userData = {};
-  void getUserDetails() async {
+  Future<void> getUserDetails() async {
     var authUser = FirebaseAuth.instance.currentUser;
     var dataSnapshot = await db.collection("users").doc(authUser!.uid).get();
 
